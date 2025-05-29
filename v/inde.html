@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluquería StyleMaster - Sistema de Citas</title>
+    <style>
+        /* ESTILOS EXTRA GRANDES */
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #4a2c82;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+        h2 {
+            font-size: 36px;
+            color: #4a2c82;
+            border-bottom: 3px solid #4a2c82;
+            padding-bottom: 15px;
+            margin-top: 40px;
+        }
+        nav {
+            background-color: #333;
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+        nav li {
+            display: inline;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 28px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #4a2c82;
+        }
+        form {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        .form-group {
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 28px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 20px;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4a2c82;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 28px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3a1c72;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+            font-size: 24px;
+        }
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+        }
+        th {
+            background-color: #4a2c82;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .action-btn {
+            padding: 10px 20px;
+            font-size: 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+        .edit-btn {
+            background-color: #ffc107;
+            color: black;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #333;
+            color: white;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PELUQUERÍA STYLEMASTER</h1>
+            <p style="font-size: 28px;">Sistema de Gestión de Citas</p>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="#" onclick="showPage('home')">Inicio</a></li>
+                <li><a href="#" onclick="showPage('agendar')">Agendar Cita</a></li>
+                <li><a href="#" onclick="showPage('agenda')">Agenda</a></li>
+                <li><a href="#" onclick="showPage('clientes')">Clientes</a></li>
+                <li><a href="#" onclick="showPage('nosotros')">Nosotros</a></li>
+            </ul>
+        </nav>
+
+        <!-- PÁGINA DE INICIO -->
+        <div id="home-page" class="page">
+            <h2>BIENVENIDO AL SISTEMA DE CITAS</h2>
+            <p style="font-size: 28px;">Gestione fácilmente las citas de su peluquería con nuestro sistema intuitivo y eficiente.</p>
+            <img src="https://via.placeholder.com/1200x600/4a2c82/ffffff?text=Peluquería+StyleMaster" alt="Peluquería StyleMaster" style="width: 100%; border-radius: 10px; margin: 30px 0;">
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 40px;">
+                <div style="width: 48%; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+                    <h3 style="font-size: 32px; color: #4a2c82;">Próximas Citas</h3>
+                    <ul id="proximas-citas" style="font-size: 24px;">
+                        <!-- Las citas se cargarán dinámicamente -->
+                    </ul>
+                </div>
+                <div style="width: 48%; background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+                    <h3 style="font-size: 32px; color: #4a2c82;">Clientes Frecuentes</h3>
+                    <ul id="clientes-frecuentes" style="font-size: 24px;">
+                        <!-- Los clientes se cargarán dinámicamente -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA PARA AGENDAR CITAS -->
+        <div id="agendar-page" class="page hidden">
+            <h2>AGENDAR NUEVA CITA</h2>
+            <form id="cita-form">
+                <div class="form-group">
+                    <label for="nombre-cliente">Nombre del Cliente:</label>
+                    <input type="text" id="nombre-cliente" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono-cliente">Teléfono:</label>
+                    <input type="tel" id="telefono-cliente" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="servicio">Servicio:</label>
+                    <select id="servicio" required>
+                        <option value="">Seleccione un servicio</option>
+                        <option value="Corte de cabello">Corte de cabello</option>
+                        <option value="Peinado">Peinado</option>
+                        <option value="Tintura">Tintura</option>
+                        <option value="Alisado">Alisado</option>
+                        <option value="Tratamiento capilar">Tratamiento capilar</option>
+                        <option value="Barba">Arreglo de barba</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hora">Hora:</label>
+                    <input type="time" id="hora" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="barbero">Barbero/Peluquero:</label>
+                    <select id="barbero" required>
+                        <option value="">Seleccione un profesional</option>
+                        <option value="Juan Pérez">Juan Pérez</option>
+                        <option value="María García">María García</option>
+                        <option value="Carlos López">Carlos López</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notas">Notas adicionales:</label>
+                    <textarea id="notas" rows="4"></textarea>
+                </div>
+                
+                <button type="submit">AGENDAR CITA</button>
+            </form>
+        </div>
+
+        <!-- PÁGINA DE AGENDA -->
+        <div id="agenda-page" class="page hidden">
+            <h2>AGENDA DE CITAS</h2>
+            <div style="margin-bottom: 30px;">
+                <label for="filtro-estado" style="display: inline-block; margin-right: 20px;">Filtrar por estado:</label>
+                <select id="filtro-estado" style="width: auto; padding: 15px; font-size: 24px; display: inline-block;" onchange="filtrarCitas()">
+                    <option value="todas">Todas las citas</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="completada">Completadas</option>
+                    <option value="cancelada">Canceladas</option>
+                </select>
+            </div>
+            
+            <table id="tabla-citas">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Servicio</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Barbero</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="citas-body">
+                    <!-- Las citas se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PÁGINA DE EDICIÓN DE CITA (OCULTA INICIALMENTE) -->
+        <div id="editar-page" class="page hidden">
+            <h2>EDITAR CITA</h2>
+            <form id="editar-cita-form">
+                <input type="hidden" id="editar-id">
+                
+                <div class="form-group">
+                    <label for="editar-nombre-cliente">Nombre del Cliente:</label>
+                    <input type="text" id="editar-nombre-cliente" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-telefono-cliente">Teléfono:</label>
+                    <input type="tel" id="editar-telefono-cliente" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-servicio">Servicio:</label>
+                    <select id="editar-servicio" required>
+                        <option value="">Seleccione un servicio</option>
+                        <option value="Corte de cabello">Corte de cabello</option>
+                        <option value="Peinado">Peinado</option>
+                        <option value="Tintura">Tintura</option>
+                        <option value="Alisado">Alisado</option>
+                        <option value="Tratamiento capilar">Tratamiento capilar</option>
+                        <option value="Barba">Arreglo de barba</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-fecha">Fecha:</label>
+                    <input type="date" id="editar-fecha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-hora">Hora:</label>
+                    <input type="time" id="editar-hora" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-barbero">Barbero/Peluquero:</label>
+                    <select id="editar-barbero" required>
+                        <option value="">Seleccione un profesional</option>
+                        <option value="Juan Pérez">Juan Pérez</option>
+                        <option value="María García">María García</option>
+                        <option value="Carlos López">Carlos López</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-notas">Notas adicionales:</label>
+                    <textarea id="editar-notas" rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editar-estado">Estado:</label>
+                    <select id="editar-estado" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="completada">Completada</option>
+                        <option value="cancelada">Cancelada</option>
+                    </select>
+                </div>
+                
+                <button type="submit">GUARDAR CAMBIOS</button>
+                <button type="button" onclick="showPage('agenda')" style="background-color: #6c757d; margin-left: 20px;">CANCELAR</button>
+            </form>
+        </div>
+
+        <!-- PÁGINA DE CLIENTES -->
+        <div id="clientes-page" class="page hidden">
+            <h2>REGISTRO DE CLIENTES</h2>
+            
+            <form id="cliente-form" style="margin-bottom: 40px;">
+                <div class="form-group">
+                    <label for="cliente-nombre">Nombre Completo:</label>
+                    <input type="text" id="cliente-nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cliente-telefono">Teléfono:</label>
+                    <input type="tel" id="cliente-telefono" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cliente-email">Email:</label>
+                    <input type="email" id="cliente-email">
+                </div>
+                
+                <div class="form-group">
+                    <label for="cliente-direccion">Dirección:</label>
+                    <input type="text" id="cliente-direccion">
+                </div>
+                
+                <button type="submit">REGISTRAR CLIENTE</button>
+            </form>
+            
+            <table id="tabla-clientes">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="clientes-body">
+                    <!-- Los clientes se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PÁGINA NOSOTROS -->
+        <div id="nosotros-page" class="page hidden">
+            <h2>SOBRE NOSOTROS</h2>
+            
+            <div style="display: flex; margin-bottom: 40px;">
+                <div style="flex: 1; padding-right: 30px;">
+                    <h3 style="font-size: 32px; color: #4a2c82;">Nuestra Historia</h3>
+                    <p style="font-size: 24px;">StyleMaster nació en 2010 con la visión de ofrecer servicios de peluquería de alta calidad en el distrito de El Agustino. Desde entonces, hemos crecido gracias a la confianza de nuestros clientes y la dedicación de nuestro equipo.</p>
+                </div>
+                <div style="flex: 1;">
+                    <img src="https://via.placeholder.com/600x400/4a2c82/ffffff?text=Local+Peluquería" alt="Local de la peluquería" style="width: 100%; border-radius: 10px;">
+                </div>
+            </div>
+            
+            <h3 style="font-size: 32px; color: #4a2c82; margin-top: 40px;">Nuestro Equipo</h3>
+            
+            <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                <div style="width: 30%; text-align: center; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+                    <img src="https://via.placeholder.com/200x200/4a2c82/ffffff?text=Juan" alt="Juan Pérez" style="width: 100%; border-radius: 50%; margin-bottom: 20px;">
+                    <h4 style="font-size: 28px; margin: 10px 0;">Juan Pérez</h4>
+                    <p style="font-size: 22px; color: #4a2c82;">Especialista en cortes clásicos</p>
+                    <p style="font-size: 20px;">10 años de experiencia</p>
+                </div>
+                
+                <div style="width: 30%; text-align: center; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+                    <img src="https://via.placeholder.com/200x200/4a2c82/ffffff?text=María" alt="María García" style="width: 100%; border-radius: 50%; margin-bottom: 20px;">
+                    <h4 style="font-size: 28px; margin: 10px 0;">María García</h4>
+                    <p style="font-size: 22px; color: #4a2c82;">Especialista en coloración</p>
+                    <p style="font-size: 20px;">8 años de experiencia</p>
+                </div>
+                
+                <div style="width: 30%; text-align: center; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1);">
+                    <img src="https://via.placeholder.com/200x200/4a2c82/ffffff?text=Carlos" alt="Carlos López" style="width: 100%; border-radius: 50%; margin-bottom: 20px;">
+                    <h4 style="font-size: 28px; margin: 10px 0;">Carlos López</h4>
+                    <p style="font-size: 22px; color: #4a2c82;">Especialista en barbas</p>
+                    <p style="font-size: 20px;">6 años de experiencia</p>
+                </div>
+            </div>
+            
+            <h3 style="font-size: 32px; color: #4a2c82; margin-top: 40px;">Nuestro Local</h3>
+            <p style="font-size: 24px;">Visítanos en nuestra ubicación principal:</p>
+            <p style="font-size: 24px; font-weight: bold;">Av. Principal 123, El Agustino, Lima</p>
+            <p style="font-size: 24px;">Horario de atención: Lunes a Sábado de 9:00 am a 7:00 pm</p>
+            
+            <div style="margin-top: 40px;">
+                <img src="https://via.placeholder.com/1200x600/4a2c82/ffffff?text=Ubicación+Local" alt="Ubicación del local" style="width: 100%; border-radius: 10px;">
+            </div>
+        </div>
+
+        <footer>
+            <p style="font-size: 24px;">© 2023 Peluquería StyleMaster - Todos los derechos reservados</p>
+            <p style="font-size: 20px;">Sistema de Gestión de Citas v1.0</p>
+        </footer>
+    </div>
+
+    <script>
+        // BASE DE DATOS EN MEMORIA
+        let citas = JSON.parse(localStorage.getItem('citas')) || [];
+        let clientes = JSON.parse(localStorage.getItem('clientes')) || [];
+        
+        // FUNCIÓN PARA MOSTRAR PÁGINAS
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(`${pageId}-page`).classList.remove('hidden');
+            
+            // Actualizar contenido específico de cada página
+            if (pageId === 'home') {
+                actualizarProximasCitas();
+                actualizarClientesFrecuentes();
+            } else if (pageId === 'agenda') {
+                cargarCitas();
+            } else if (pageId === 'clientes') {
+                cargarClientes();
+            }
+        }
+        
+        // FUNCIONES PARA CITAS
+        function agregarCita(event) {
+            event.preventDefault();
+            
+            const nombreCliente = document.getElementById('nombre-cliente').value;
+            const telefonoCliente = document.getElementById('telefono-cliente').value;
+            const servicio = document.getElementById('servicio').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+            const barbero = document.getElementById('barbero').value;
+            const notas = document.getElementById('notas').value;
+            
+            // Validación de campos vacíos
+            if (!nombreCliente || !telefonoCliente || !servicio || !fecha || !hora || !barbero) {
+                alert('Por favor complete todos los campos obligatorios');
+                return;
+            }
+            
+            // Validación de fecha futura
+            const fechaActual = new Date();
+            const fechaCita = new Date(`${fecha}T${hora}`);
+            
+            if (fechaCita < fechaActual) {
+                alert('No puede agendar citas en fechas pasadas');
+                return;
+            }
+            
+            const nuevaCita = {
+                id: Date.now(),
+                nombreCliente,
+                telefonoCliente,
+                servicio,
+                fecha,
+                hora,
+                barbero,
+                notas,
+                estado: 'pendiente',
+                fechaCreacion: new Date().toISOString()
+            };
+            
+            citas.push(nuevaCita);
+            guardarCitas();
+            
+            // Agregar como cliente si no existe
+            const clienteExistente = clientes.find(c => c.telefono === telefonoCliente);
+            if (!clienteExistente) {
+                clientes.push({
+                    id: Date.now(),
+                    nombre: nombreCliente,
+                    telefono: telefonoCliente,
+                    email: '',
+                    direccion: ''
+                });
+                guardarClientes();
+            }
+            
+            alert('Cita agendada exitosamente');
+            document.getElementById('cita-form').reset();
+            showPage('agenda');
+        }
+        
+        function cargarCitas() {
+            const cuerpoTabla = document.getElementById('citas-body');
+            cuerpoTabla.innerHTML = '';
+            
+            const estadoFiltro = document.getElementById('filtro-estado').value;
+            
+            const citasFiltradas = estadoFiltro === 'todas' 
+                ? citas 
+                : citas.filter(cita => cita.estado === estadoFiltro);
+            
+            citasFiltradas.forEach(cita => {
+                const fila = document.createElement('tr');
+                
+                fila.innerHTML = `
+                    <td>${cita.nombreCliente}</td>
+                    <td>${cita.servicio}</td>
+                    <td>${formatearFecha(cita.fecha)}</td>
+                    <td>${cita.hora}</td>
+                    <td>${cita.barbero}</td>
+                    <td>${traducirEstado(cita.estado)}</td>
+                    <td>
+                        <button onclick="editarCita(${cita.id})" class="action-btn edit-btn">Editar</button>
+                        <button onclick="eliminarCita(${cita.id})" class="action-btn delete-btn">Eliminar</button>
+                    </td>
+                `;
+                
+                cuerpoTabla.appendChild(fila);
+            });
+        }
+        
+        function filtrarCitas() {
+            cargarCitas();
+        }
+        
+        function editarCita(id) {
+            const cita = citas.find(c => c.id === id);
+            if (!cita) return;
+            
+            document.getElementById('editar-id').value = cita.id;
+            document.getElementById('editar-nombre-cliente').value = cita.nombreCliente;
+            document.getElementById('editar-telefono-cliente').value = cita.telefonoCliente;
+            document.getElementById('editar-servicio').value = cita.servicio;
+            document.getElementById('editar-fecha').value = cita.fecha;
+            document.getElementById('editar-hora').value = cita.hora;
+            document.getElementById('editar-barbero').value = cita.barbero;
+            document.getElementById('editar-notas').value = cita.notas || '';
+            document.getElementById('editar-estado').value = cita.estado;
+            
+            showPage('editar');
+        }
+        
+        function actualizarCita(event) {
+            event.preventDefault();
+            
+            const id = parseInt(document.getElementById('editar-id').value);
+            const nombreCliente = document.getElementById('editar-nombre-cliente').value;
+            const telefonoCliente = document.getElementById('editar-telefono-cliente').value;
+            const servicio = document.getElementById('editar-servicio').value;
+            const fecha = document.getElementById('editar-fecha').value;
+            const hora = document.getElementById('editar-hora').value;
+            const barbero = document.getElementById('editar-barbero').value;
+            const notas = document.getElementById('editar-notas').value;
+            const estado = document.getElementById('editar-estado').value;
+            
+            // Validación de campos vacíos
+            if (!nombreCliente || !telefonoCliente || !servicio || !fecha || !hora || !barbero) {
+                alert('Por favor complete todos los campos obligatorios');
+                return;
+            }
+            
+            const index = citas.findIndex(c => c.id === id);
+            if (index === -1) return;
+            
+            citas[index] = {
+                ...citas[index],
+                nombreCliente,
+                telefonoCliente,
+                servicio,
+                fecha,
+                hora,
+                barbero,
+                notas,
+                estado
+            };
+            
+            guardarCitas();
+            alert('Cita actualizada exitosamente');
+            showPage('agenda');
+        }
+        
+        function eliminarCita(id) {
+            if (!confirm('¿Está seguro que desea eliminar esta cita?')) return;
+            
+            citas = citas.filter(c => c.id !== id);
+            guardarCitas();
+            cargarCitas();
+        }
+        
+        function actualizarProximasCitas() {
+            const lista = document.getElementById('proximas-citas');
+            lista.innerHTML = '';
+            
+            const citasPendientes = citas
+                .filter(c => c.estado === 'pendiente')
+                .sort((a, b) => new Date(`${a.fecha}T${a.hora}`) - new Date(`${b.fecha}T${b.hora}`))
+                .slice(0, 5);
+            
+            if (citasPendientes.length === 0) {
+                lista.innerHTML = '<li>No hay citas próximas</li>';
+                return;
+            }
+            
+            citasPendientes.forEach(cita => {
+                const item = document.createElement('li');
+                item.textContent = `${cita.nombreCliente} - ${cita.servicio} (${formatearFecha(cita.fecha)} ${cita.hora})`;
+                lista.appendChild(item);
+            });
+        }
+        
+        // FUNCIONES PARA CLIENTES
+        function agregarCliente(event) {
+            event.preventDefault();
+            
+            const nombre = document.getElementById('cliente-nombre').value;
+            const telefono = document.getElementById('cliente-telefono').value;
+            const email = document.getElementById('cliente-email').value;
+            const direccion = document.getElementById('cliente-direccion').value;
+            
+            // Validación de campos obligatorios
+            if (!nombre || !telefono) {
+                alert('Nombre y teléfono son campos obligatorios');
+                return;
+            }
+            
+            // Verificar si el cliente ya existe
+            const clienteExistente = clientes.find(c => c.telefono === telefono);
+            if (clienteExistente) {
+                alert('Ya existe un cliente con este número de teléfono');
+                return;
+            }
+            
+            const nuevoCliente = {
+                id: Date.now(),
+                nombre,
+                telefono,
+                email,
+                direccion
+            };
+            
+            clientes.push(nuevoCliente);
+            guardarClientes();
+            
+            alert('Cliente registrado exitosamente');
+            document.getElementById('cliente-form').reset();
+            cargarClientes();
+        }
+        
+        function cargarClientes() {
+            const cuerpoTabla = document.getElementById('clientes-body');
+            cuerpoTabla.innerHTML = '';
+            
+            clientes.forEach(cliente => {
+                const fila = document.createElement('tr');
+                
+                fila.innerHTML = `
+                    <td>${cliente.nombre}</td>
+                    <td>${cliente.telefono}</td>
+                    <td>${cliente.email || 'N/A'}</td>
+                    <td>${cliente.direccion || 'N/A'}</td>
+                    <td>
+                        <button onclick="editarCliente(${cliente.id})" class="action-btn edit-btn">Editar</button>
+                        <button onclick="eliminarCliente(${cliente.id})" class="action-btn delete-btn">Eliminar</button>
+                    </td>
+                `;
+                
+                cuerpoTabla.appendChild(fila);
+            });
+        }
+        
+        function editarCliente(id) {
+            const cliente = clientes.find(c => c.id === id);
+            if (!cliente) return;
+            
+            document.getElementById('cliente-nombre').value = cliente.nombre;
+            document.getElementById('cliente-telefono').value = cliente.telefono;
+            document.getElementById('cliente-email').value = cliente.email || '';
+            document.getElementById('cliente-direccion').value = cliente.direccion || '';
+            
+            // Eliminar el cliente para actualizarlo
+            clientes = clientes.filter(c => c.id !== id);
+            
+            // Desplazarse al formulario
+            document.getElementById('cliente-form').scrollIntoView();
+        }
+        
+        function eliminarCliente(id) {
+            if (!confirm('¿Está seguro que desea eliminar este cliente?')) return;
+            
+            clientes = clientes.filter(c => c.id !== id);
+            guardarClientes();
+            cargarClientes();
+        }
+        
+        function actualizarClientesFrecuentes() {
+            const lista = document.getElementById('clientes-frecuentes');
+            lista.innerHTML = '';
+            
+            const clientesFrecuentes = clientes.slice(0, 5);
+            
+            if (clientesFrecuentes.length === 0) {
+                lista.innerHTML = '<li>No hay clientes registrados</li>';
+                return;
+            }
+            
+            clientesFrecuentes.forEach(cliente => {
+                const item = document.createElement('li');
+                item.textContent = `${cliente.nombre} - ${cliente.telefono}`;
+                lista.appendChild(item);
+            });
+        }
+        
+        // FUNCIONES DE UTILIDAD
+        function guardarCitas() {
+            localStorage.setItem('citas', JSON.stringify(citas));
+        }
+        
+        function guardarClientes() {
+            localStorage.setItem('clientes', JSON.stringify(clientes));
+        }
+        
+        function formatearFecha(fechaStr) {
+            const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(fechaStr).toLocaleDateString('es-ES', opciones);
+        }
+        
+        function traducirEstado(estado) {
+            const estados = {
+                'pendiente': 'Pendiente',
+                'completada': 'Completada',
+                'cancelada': 'Cancelada'
+            };
+            return estados[estado] || estado;
+        }
+        
+        // EVENT LISTENERS
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mostrar página de inicio por defecto
+            showPage('home');
+            
+            // Asignar manejadores de eventos
+            document.getElementById('cita-form').addEventListener('submit', agregarCita);
+            document.getElementById('editar-cita-form').addEventListener('submit', actualizarCita);
+            document.getElementById('cliente-form').addEventListener('submit', agregarCliente);
+            
+            // Configurar fecha mínima en los campos de fecha
+            const hoy = new Date().toISOString().split('T')[0];
+            document.getElementById('fecha').min = hoy;
+            document.getElementById('editar-fecha').min = hoy;
+        });
+    </script>
+</body>
+</html>

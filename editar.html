@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cita - StyleCut</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>StyleCut - Editar Cita</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="agendar.html">Agendar Cita</a></li>
+                <li><a href="agenda.html">Agenda</a></li>
+                <li><a href="clientes.html">Clientes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="form-section">
+            <h2>Editar Cita</h2>
+            <form id="editarCitaForm">
+                <input type="hidden" id="citaId">
+                
+                <div class="form-group">
+                    <label for="editNombre">Nombre del Cliente:</label>
+                    <input type="text" id="editNombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editTelefono">Teléfono:</label>
+                    <input type="tel" id="editTelefono" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editServicio">Servicio:</label>
+                    <select id="editServicio" required>
+                        <option value="">Seleccione un servicio</option>
+                        <option value="Corte de Cabello">Corte de Cabello</option>
+                        <option value="Peinado">Peinado</option>
+                        <option value="Tinturado">Tinturado</option>
+                        <option value="Barba">Arreglo de Barba</option>
+                        <option value="Combo">Combo Completo</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editBarbero">Barbero/Peluquero:</label>
+                    <select id="editBarbero" required>
+                        <option value="">Seleccione un profesional</option>
+                        <option value="Juan Pérez">Juan Pérez</option>
+                        <option value="María García">María García</option>
+                        <option value="Carlos López">Carlos López</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editFecha">Fecha:</label>
+                    <input type="date" id="editFecha" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editHora">Hora:</label>
+                    <input type="time" id="editHora" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editNotas">Notas adicionales:</label>
+                    <textarea id="editNotas" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editEstado">Estado:</label>
+                    <select id="editEstado" required>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="completada">Completada</option>
+                        <option value="cancelada">Cancelada</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn">Guardar Cambios</button>
+                <a href="agenda.html" class="btn cancelar">Cancelar</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Peluquería StyleCut. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+<script src="js/citas.js"></script>
+<!-- o -->
+<script src="js/clientes.js"></script>
+</body>
+</html>

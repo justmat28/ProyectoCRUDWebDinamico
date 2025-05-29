@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Citas - StyleCut</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>StyleCut - Agenda de Citas</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="agendar.html">Agendar Cita</a></li>
+                <li><a href="agenda.html" class="active">Agenda</a></li>
+                <li><a href="clientes.html">Clientes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="agenda-section">
+            <h2>Citas Agendadas</h2>
+            
+            <div class="filtros">
+                <label for="filtroFecha">Filtrar por fecha:</label>
+                <input type="date" id="filtroFecha">
+                
+                <label for="filtroBarbero">Filtrar por barbero:</label>
+                <select id="filtroBarbero">
+                    <option value="">Todos</option>
+                    <option value="Juan Pérez">Juan Pérez</option>
+                    <option value="María García">María García</option>
+                    <option value="Carlos López">Carlos López</option>
+                </select>
+                
+                <label for="filtroEstado">Filtrar por estado:</label>
+                <select id="filtroEstado">
+                    <option value="">Todos</option>
+                    <option value="pendiente">Pendientes</option>
+                    <option value="completada">Completadas</option>
+                    <option value="cancelada">Canceladas</option>
+                </select>
+                
+                <button id="aplicarFiltros" class="btn">Aplicar Filtros</button>
+            </div>
+            
+            <table id="tablaCitas">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Teléfono</th>
+                        <th>Servicio</th>
+                        <th>Barbero</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las citas se cargarán aquí con JavaScript -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Peluquería StyleCut. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+<script src="js/citas.js"></script>
+<!-- o -->
+<script src="js/clientes.js"></script>
+</body>
+</html>

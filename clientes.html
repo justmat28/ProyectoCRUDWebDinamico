@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes Frecuentes - StyleCut</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>StyleCut - Clientes Frecuentes</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="agendar.html">Agendar Cita</a></li>
+                <li><a href="agenda.html">Agenda</a></li>
+                <li><a href="clientes.html" class="active">Clientes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="clientes-section">
+            <h2>Registro de Clientes Frecuentes</h2>
+            
+            <div class="form-container">
+                <form id="clienteForm">
+                    <input type="hidden" id="clienteId">
+                    
+                    <div class="form-group">
+                        <label for="clienteNombre">Nombre Completo:</label>
+                        <input type="text" id="clienteNombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clienteTelefono">Teléfono:</label>
+                        <input type="tel" id="clienteTelefono" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clienteEmail">Email:</label>
+                        <input type="email" id="clienteEmail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clienteFrecuencia">Visitas por mes:</label>
+                        <input type="number" id="clienteFrecuencia" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="clientePreferencias">Preferencias de servicio:</label>
+                        <textarea id="clientePreferencias" rows="3"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="guardarCliente" class="btn">Guardar Cliente</button>
+                </form>
+            </div>
+            
+            <div class="tabla-container">
+                <table id="tablaClientes">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Visitas/mes</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los clientes se cargarán aquí con JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Peluquería StyleCut. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+<script src="js/citas.js"></script>
+<!-- o -->
+<script src="js/clientes.js"></script>
+</body>
+</html>
